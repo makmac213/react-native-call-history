@@ -79,17 +79,18 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
                     callType = "MISSED_TYPE";
                     break;
 
-                case CallLog.Calls.ANSWERED_EXTERNALLY_TYPE:
-                    callType = "ANSWERED_EXTERNALLY_TYPE";
-                    break;
+                // below three types are for api > level 24
+                // case CallLog.Calls.ANSWERED_EXTERNALLY_TYPE:
+                //     callType = "ANSWERED_EXTERNALLY_TYPE";
+                //     break;
 
-                case CallLog.Calls.BLOCKED_TYPE:
-                    callType = "BLOCKED_TYPE";
-                    break;
+                // case CallLog.Calls.BLOCKED_TYPE:
+                //     callType = "BLOCKED_TYPE";
+                //     break;
 
-                case CallLog.Calls.REJECTED_TYPE:
-                    callType = "REJECTED_TYPE";
-                    break;
+                // case CallLog.Calls.REJECTED_TYPE:
+                //     callType = "REJECTED_TYPE";
+                //     break;
 
                 case CallLog.Calls.VOICEMAIL_TYPE:
                     callType = "VOICEMAIL_TYPE";
