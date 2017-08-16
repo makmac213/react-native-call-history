@@ -24,7 +24,7 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     // set the activity - pulled in from Main
     public RNCallHistoryModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.reactContext = reactContext;
+        this.context = reactContext;
     }
 
     @Override
