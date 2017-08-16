@@ -1,18 +1,20 @@
 package com.reactnativecallhistory;
 
-
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+
 import java.lang.StringBuffer;
-import android.database.Cursor;
 import java.util.Date;
-import android.content.Context;
+
 import org.json.*;
 
 public class RNCallHistoryModule extends ReactContextBaseJavaModule {
@@ -33,8 +35,10 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void list(Callback callBack) {
         StringBuffer sb = new StringBuffer();
-        Cursor cursor = this.context.getContextResolver()
-                            .query(CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
+        
+        Cursor cursor = this.context.getContextResolver().query(
+            CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
+        
         if (cursor == null) {
             callBack.invoke("[]");
             return;
