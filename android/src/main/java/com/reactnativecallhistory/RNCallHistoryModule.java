@@ -23,8 +23,8 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
 
     // set the activity - pulled in from Main
     public RNCallHistoryModule(ReactApplicationContext reactContext) {
-      super(reactContext);
-      this.reactContext = reactContext;
+        super(reactContext);
+        this.reactContext = reactContext;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     public void list(Callback callBack) {
         StringBuffer sb = new StringBuffer();
         
-        Cursor cursor = this.context.getContextResolver().query(
+        Cursor cursor = this.context.getContentResolver().query(
             CallLog.Calls.CONTENT_URI, null, null, null, CallLog.Calls.DATE + " DESC");
         
         if (cursor == null) {
