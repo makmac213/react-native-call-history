@@ -35,7 +35,7 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void list(String filter, Callback callBack) {
+    public void list(Callback callBack) {
         StringBuffer sb = new StringBuffer();
         
         Cursor cursor = this.context.getContentResolver().query(
