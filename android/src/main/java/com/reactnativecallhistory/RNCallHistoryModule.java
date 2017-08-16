@@ -91,7 +91,7 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
                     callType = "REJECTED_TYPE";
                     break;
 
-                case CallLog.Calls.VOICEMAIL_TYPE;
+                case CallLog.Calls.VOICEMAIL_TYPE:
                     callType = "VOICEMAIL_TYPE";
                     break;
             }
