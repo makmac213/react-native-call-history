@@ -44,6 +44,9 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
         int name = cursor.getColumnIndex(CallLog.Calls.CACHED_NAME);
         JSONArray callArray = new JSONArray();
         while (cursor.moveToNext()) {
+            String phoneNumber = cursor.getString(number);
+            String contactName = cursor.getString(name);
+
             JSONObject callObj = new JSONObject();
             try {
                 callObj.put("phoneNumber", phoneNumber);
