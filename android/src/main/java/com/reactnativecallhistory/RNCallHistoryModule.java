@@ -19,6 +19,8 @@ import org.json.*;
 
 public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     
+    private static final String TAG = RNCallHistoryModule.class.getSimpleName();
+
     private Context context;
 
     // set the activity - pulled in from Main
@@ -33,7 +35,7 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void list(Callback callBack) {
+    public void list(String filter, Callback callBack) {
         StringBuffer sb = new StringBuffer();
         
         Cursor cursor = this.context.getContentResolver().query(
