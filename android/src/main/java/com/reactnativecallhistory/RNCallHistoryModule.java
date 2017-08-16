@@ -19,7 +19,7 @@ import org.json.*;
 
 public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     
-    private ReactApplicationContext reactContext;
+    private Context context;
 
     // set the activity - pulled in from Main
     public RNCallHistoryModule(ReactApplicationContext reactContext) {
