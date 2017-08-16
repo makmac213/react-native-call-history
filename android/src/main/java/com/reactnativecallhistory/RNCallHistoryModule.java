@@ -35,7 +35,7 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void list(Callback callBack) {
+    public void list(Callback callBack, Callback errorCallBack) {
         StringBuffer sb = new StringBuffer();
         
         Cursor cursor = this.context.getContentResolver().query(
@@ -46,20 +46,67 @@ public class RNCallHistoryModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
-        int name = cursor.getColumnIndex(CallLog.Calls.CACHED_NAME);
+        int idxNumber = cursor.getColumnIndex(CallLog.Calls.NUMBER);
+        int idxName = cursor.getColumnIndex(CallLog.Calls.CACHED_NAME);
+        int idxType = cursor.getColumnIndex(CallLog.Calls.TYPE);
+        int idxDate = cursor.getColumnIndex(CallLog.Calls.DATE);
+        int idxDuration = cursor.getColumnIndex(CallLog.Calls.DURATION);
+
         JSONArray callArray = new JSONArray();
+        
         while (cursor.moveToNext()) {
-            String phoneNumber = cursor.getString(number);
-            String contactName = cursor.getString(name);
+            String phoneNumber = cursor.getString(idxNumber);
+            String contactName = cursor.getString(idxName);
+            String callDuration = cursor.getString(idxDuration);
+            String callDate = cursor.getString(idxDate);
+            Date callDateTime = new Date(Long.valueOf(callDate));
+            
+            String callType = null;
+            String strCallType = cursor.getString(idxType);
+            int intCallType = Integer.parseInt(strCallType);
+
+            switch (intCallType) {
+
+                case CallLog.Calls.INCOMING_TYPE:
+                    callType = "INCOMING_TYPE";
+                    break;
+
+                case CallLog.Calls.OUTGOING_TYPE:
+                    callType = "OUTGOING_TYPE";
+                    break;
+
+                case CallLog.Calls.MISSED_TYPE:
+                    callType = "MISSED_TYPE";
+                    break;
+
+                case CallLog.Calls.ANSWERED_EXTERNALLY_TYPE:
+                    callType = "ANSWERED_EXTERNALLY_TYPE";
+                    break;
+
+                case CallLog.Calls.BLOCKED_TYPE:
+                    callType = "BLOCKED_TYPE";
+                    break;
+
+                case CallLog.Calls.REJECTED_TYPE:
+                    callType = "REJECTED_TYPE";
+                    break;
+
+                case CallLog.Calls.VOICEMAIL_TYPE;
+                    callType = "VOICEMAIL_TYPE";
+                    break;
+            }
 
             JSONObject callObj = new JSONObject();
             try {
                 callObj.put("phoneNumber", phoneNumber);
                 callObj.put("name", contactName);
+                callObj.put("callDuration", callDuration);
+                callObj.put("callDate", callDate);
+                callObj.put("callDateTime", callDateTime);
+                callObj.put("callType", callType);
                 callArray.put(callObj);
             } catch (JSONException e) {
-                e.printStackTrace();
+                errorCallBack.invoke(e.getMessage());
             }
         }
         cursor.close();
