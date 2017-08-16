@@ -10,13 +10,13 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
-public class RNCallHistoryModule implements ReactPackage {
-    private RNCallHistoryModule mModuleInstance;
+public class RNCallHistoryPackage implements ReactPackage {
+    private RNCallHistoryPackage mModuleInstance;
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      mModuleInstance = new RNCallHistoryModule(reactContext);
-      return Arrays.<NativeModule>asList(mModuleInstance);
+      mModuleInstance = new RNCallHistoryPackage(reactContext);
+      return Arrays<NativeModule>asList(mModuleInstance);
     }
 
     @Override
